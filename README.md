@@ -39,3 +39,30 @@ This project uses [Make](https://www.gnu.org/software/make/). The Makefile has f
 5. Implement the `System`, `Process`, and `Processor` classes, as well as functions within the `LinuxParser` namespace.
 
 6. Submit!
+
+
+## Dev Diary
+
+### 2021-01-15
+
+- After forking and cloning the directory, I did the following
+- `mkdir root_of_project/build ; cd build; cmake ..; make ..`
+- in the above the `cmake ..` failed with the following text
+
+```
+CMake Error at /usr/share/cmake-3.16/Modules/FindPackageHandleStandardArgs.cmake:146 (message):
+  Could NOT find Curses (missing: CURSES_LIBRARY CURSES_INCLUDE_PATH)
+Call Stack (most recent call first):
+  /usr/share/cmake-3.16/Modules/FindPackageHandleStandardArgs.cmake:393 (_FPHSA_FAILURE_MESSAGE)
+  /usr/share/cmake-3.16/Modules/FindCurses.cmake:258 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
+  CMakeLists.txt:4 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/das/Documents/CppND-System-Monitor/build/CMakeFiles/CMakeOutput.log".
+```
+- from [stackoverflow](https://stackoverflow.com/questions/35216344/make-cant-find-curses-h) 
+- it was indicated that the ncurses package is missing
+- fix with `sudo apt-get install libncurses-dev`
+- now run the cmake and make commands `cd build && cmake .. && make`
+- success <img src="images/success_cmake_make_1.png">
