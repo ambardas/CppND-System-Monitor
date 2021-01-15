@@ -17,6 +17,7 @@ You are welcome to develop this project on your local machine, and you are not r
 Within the Udacity Workspace, `.student_bashrc` automatically installs ncurses every time you launch the Workspace.
 
 If you are not using the Workspace, install ncurses within your own Linux environment: `sudo apt install libncurses5-dev libncursesw5-dev`
+or `sudo apt-get install libncurses-dev` for newer Ubuntu installs: Tested on __Ubuntu 20.04.1 LTS__
 
 ## Make
 This project uses [Make](https://www.gnu.org/software/make/). The Makefile has four targets:
@@ -27,7 +28,7 @@ This project uses [Make](https://www.gnu.org/software/make/). The Makefile has f
 
 ## Instructions
 
-1. Clone the project repository: `git clone https://github.com/udacity/CppND-System-Monitor-Project-Updated.git`
+1. Clone the project repository: `git clone git@github.com:ambardas/CppND-System-Monitor.git`
 
 2. Build the project: `make build`
 
