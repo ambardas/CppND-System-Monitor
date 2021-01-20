@@ -2,12 +2,14 @@
 #define PROCESS_H
 
 #include <string>
+#include <unordered_map>
 /*
 Basic class for Process representation
 It contains relevant attributes as shown below
 */
 class Process {
  public:
+  Process(int pid, std::unordered_map<int, std::string> uid_user_map);
   int Pid();                               // TODO: See src/process.cpp
   std::string User();                      // TODO: See src/process.cpp
   std::string Command();                   // TODO: See src/process.cpp
