@@ -4,6 +4,7 @@
 #include <fstream>
 #include <regex>
 #include <string>
+#include <unordered_map>
 
 namespace LinuxParser {
 // Paths
@@ -47,6 +48,7 @@ long ActiveJiffies(int pid);
 long IdleJiffies();
 
 // Processes
+std::unordered_map<int, std::string> Uid_User_Map();
 std::string Command(int pid);
 std::string Ram(int pid);
 std::string Uid(int pid);

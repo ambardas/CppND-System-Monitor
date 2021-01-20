@@ -136,3 +136,21 @@ string LinuxParser::User(int pid [[maybe_unused]]) { return string(); }
 // TODO: Read and return the uptime of a process
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::UpTime(int pid [[maybe_unused]]) { return 0; }
+
+std::unordered_map<int, std::string> LinuxParser::Uid_User_Map(){
+  std::unordered_map<int, std::string> uid_user_map;
+  std::string line;
+  std::string user, spacer;
+  int uid;
+  std::ifstream filestream(kPasswordPath);
+  if (filestream.is_open()) {
+    while (std::getline(filestream, line)) {
+      std::replace(line.begin(), line.end(), ':', ' ');
+      std::istringstream linestream(line);
+      while (linestream >> user >> spacer >> uid) {
+        uid_user_map[uid] = user;
+      }
+    }
+  }
+  return uid_user_map;
+}
