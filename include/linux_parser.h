@@ -1,13 +1,16 @@
 #ifndef SYSTEM_PARSER_H
 #define SYSTEM_PARSER_H
 
+#include <process.h>
+
 #include <fstream>
 #include <regex>
 #include <string>
+#include <unordered_map>
 
 namespace LinuxParser {
 // Paths
-const std::string kProcDirectory{"/proc/"};
+const std::string kProcDirectory{"/proc"};
 const std::string kCmdlineFilename{"/cmdline"};
 const std::string kCpuinfoFilename{"/cpuinfo"};
 const std::string kStatusFilename{"/status"};
@@ -47,6 +50,7 @@ long ActiveJiffies(int pid);
 long IdleJiffies();
 
 // Processes
+std::unordered_map<int, std::string> Uid_User_Map();
 std::string Command(int pid);
 std::string Ram(int pid);
 std::string Uid(int pid);
