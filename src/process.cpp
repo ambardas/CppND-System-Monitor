@@ -27,7 +27,18 @@ int Process::Pid() const { return pid; }
 float Process::CpuUtilization() const { return cpu_util; }
 
 // TODO: Return the command that generated this process
-string Process::Command() const { return command; }
+string Process::Command() const {
+  string trunc_command;
+  if (command.size() > 40) {
+    trunc_command = command.substr(0, 37) + "...";
+  } else if (command.size() == 0) {
+    trunc_command = " ";
+  } else {
+    trunc_command = command;
+  }
+
+  return trunc_command;
+}
 
 // TODO: Return this process's memory utilization
 string Process::Ram() const { return ram; }
