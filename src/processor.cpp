@@ -28,6 +28,7 @@ void Processor::read_raw_cpu_stats() {
     my_stream >> cpu >> user >> nice >> system >> idle >> iowait >> irq >>
         softirq >> steal >> guest >> guest_nice;
   }
+  stream.close();
 }
 
 void Processor::compute_cpu_util() {
