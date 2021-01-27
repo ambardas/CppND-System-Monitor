@@ -16,6 +16,9 @@ string nice_string(int time_unit){
 // INPUT: Long int measuring seconds
 // OUTPUT: HH:MM:SS
 // REMOVE: [[maybe_unused]] once you define the function
+
+//Note: since I was able to use the below code without errors, 
+// I am going to leave out the chrono implementation of the same
 string Format::ElapsedTime(long seconds) { 
   int hours = seconds /3600;
   int minutes = (seconds/60) - (hours*60);
