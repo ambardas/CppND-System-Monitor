@@ -101,7 +101,7 @@ vector<int> LinuxParser::Pids() {
       string filename(file->d_name);
       if (std::all_of(filename.begin(), filename.end(), isdigit)) {
         int pid = stoi(filename);
-        pids.push_back(pid);
+        pids.emplace_back(pid);
       }
     }
   }
