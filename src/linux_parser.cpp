@@ -150,14 +150,14 @@ int LinuxParser::RunningProcesses() {
 // TODO: Read and return the command associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Command(int pid) { 
-  Process process(pid, Uid_User_Map());
+  Process process(pid);
   return process.Command(); 
   }
 
 // TODO: Read and return the memory used by a process
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Ram(int pid) {
-  Process process(pid, Uid_User_Map());
+  Process process(pid);
   return process.Ram(); 
 }
 
@@ -168,14 +168,14 @@ string LinuxParser::Uid(int pid [[maybe_unused]]) { return "";}
 // TODO: Read and return the user associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::User(int pid) {
-  Process process(pid, Uid_User_Map());
+  Process process(pid);
   return process.User(); 
 }
 
 // TODO: Read and return the uptime of a process
 // REMOVE: [[maybe_unused]] once you define the function
 long int LinuxParser::UpTime(int pid) {
-  Process process(pid, Uid_User_Map());
+  Process process(pid);
   return process.UpTime(); 
 }
 

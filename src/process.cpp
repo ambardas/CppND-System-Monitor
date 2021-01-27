@@ -13,11 +13,11 @@ using std::to_string;
 using std::vector;
 
 // Constructor for Process
-Process::Process(int pid, std::unordered_map<int, string> uid_user_map)
-    : pid(pid), uid_user_map(uid_user_map) {
-  Cpu_Mem_Utime();
+Process::Process(int pid)
+    : pid(pid), uid_user_map(LinuxParser::Uid_User_Map()) {
   GetUser();
   GetCommand();
+  Cpu_Mem_Utime();
 };
 
 // TODO: Return this process's ID

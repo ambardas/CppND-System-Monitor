@@ -17,10 +17,9 @@ Processor& System::Cpu() { return cpu_; }
 // TODO: Return a container composed of the system's processes
 vector<Process>& System::Processes() {
   processes_.clear();
-  auto uid_user_map = LinuxParser::Uid_User_Map();
   auto pids = LinuxParser::Pids();
   for (auto pid : pids) {
-    processes_.push_back(Process(pid, uid_user_map));
+    processes_.push_back(Process(pid));
   }
   return processes_;
 }
