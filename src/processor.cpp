@@ -1,7 +1,7 @@
 #include "processor.h"
 
 // TODO: Return the aggregate CPU utilization
-float Processor::Utilization() {
+double Processor::Utilization() {
   read_raw_cpu_stats();
   compute_cpu_util();
   return CPU_Percentage;
