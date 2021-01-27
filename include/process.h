@@ -6,7 +6,7 @@
 
 #include "linux_parser.h"
 
-#define hertz sysconf(_SC_CLK_TCK)
+#define HERTZ sysconf(_SC_CLK_TCK)
 /*
 Basic class for Process representation
 It contains relevant attributes as shown below

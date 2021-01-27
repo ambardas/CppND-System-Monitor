@@ -58,7 +58,6 @@ bool Process::operator<(Process const& a) const {
 void Process::Cpu_Mem_Utime() {
   // https://man7.org/linux/man-pages/man5/proc.5.html
   // https://stackoverflow.com/questions/16726779/how-do-i-get-the-total-cpu-usage-of-an-application-from-proc-pid-stat/16736599#16736599
-  // int hertz = sysconf(_SC_CLK_TCK); // convert to compiletime const
   string user_file = LinuxParser::kProcDirectory + "/" + to_string(pid) +
                      LinuxParser::kStatFilename;
   string line;
@@ -85,8 +84,8 @@ void Process::Cpu_Mem_Utime() {
 
       long int total_time = stat14 + stat15 + stat16 + stat17;
       ram = to_string(stat23 / 1024);
-      proc_uptime = LinuxParser::UpTime() - (stat22 / hertz);
-      cpu_util = (total_time / hertz) / (proc_uptime + (proc_uptime <= 0));
+      proc_uptime = LinuxParser::UpTime() - (stat22 / HERTZ);
+      cpu_util = (total_time / HERTZ) / (proc_uptime + (proc_uptime <= 0));
     }
   }
   filestream.close();
