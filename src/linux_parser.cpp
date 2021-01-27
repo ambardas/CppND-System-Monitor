@@ -26,11 +26,13 @@ string LinuxParser::OperatingSystem() {
       while (linestream >> key >> value) {
         if (key == "PRETTY_NAME") {
           std::replace(value.begin(), value.end(), '_', ' ');
+          filestream.close();
           return value;
         }
       }
     }
   }
+  filestream.close();
   return value;
 }
 
@@ -44,6 +46,7 @@ string LinuxParser::Kernel() {
     std::istringstream linestream(line);
     linestream >> os >> version >> kernel;
   }
+  stream.close();
   return kernel;
 }
 
@@ -89,6 +92,7 @@ float LinuxParser::MemoryUtilization() {
   }
 
   percentage_mem = (tot_mem - avail_mem) / tot_mem;
+  stream.close();
   return percentage_mem;
 }
 
@@ -102,6 +106,7 @@ long LinuxParser::UpTime() {
     std::istringstream linestream(line);
     linestream >> uptime;
   }
+  stream.close();
   return uptime;
 }
 
@@ -132,11 +137,13 @@ int LinuxParser::TotalProcesses() {
       std::istringstream linestream(line);
       while (linestream >> key >> value) {
         if (key == "processes") {
+          filestream.close();
           return value;
         }
       }
     }
   }
+  filestream.close();
   return value;
 }
 
@@ -151,11 +158,13 @@ int LinuxParser::RunningProcesses() {
       std::istringstream linestream(line);
       while (linestream >> key >> value) {
         if (key == "procs_running") {
+          filestream.close();
           return value;
         }
       }
     }
   }
+  filestream.close();
   return value;
 }
 
@@ -206,5 +215,6 @@ std::unordered_map<int, std::string> LinuxParser::Uid_User_Map() {
       }
     }
   }
+  filestream.close();
   return uid_user_map;
 }
