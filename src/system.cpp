@@ -3,6 +3,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "system.h"
 
@@ -10,6 +11,8 @@ using std::set;
 using std::size_t;
 using std::string;
 using std::vector;
+
+bool Compare(const Process& a, const Process& b) { return a < b; }
 
 // TODO: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
@@ -21,6 +24,7 @@ vector<Process>& System::Processes() {
   for (auto pid : pids) {
     processes_.emplace_back(Process(pid));
   }
+  sort(processes_.begin(), processes_.end(), Compare);
   return processes_;
 }
 
