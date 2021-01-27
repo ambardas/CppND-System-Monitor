@@ -28,7 +28,7 @@ class Process {
   std::string user;
   float cpu_util;
   std::string ram;
-  long int uptime;
+  long int proc_uptime;
   std::string command;
   std::unordered_map<int, std::string> uid_user_map;
 

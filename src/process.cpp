@@ -47,7 +47,7 @@ string Process::Ram() const { return ram; }
 string Process::User() const { return user; }
 
 // TODO: Return the age of this process (in seconds)
-long int Process::UpTime() const { return uptime; }
+long int Process::UpTime() const { return proc_uptime; }
 
 // TODO: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function
@@ -62,7 +62,7 @@ void Process::Cpu_Mem_Utime() {
   string user_file = LinuxParser::kProcDirectory + "/" + to_string(pid) +
                      LinuxParser::kStatFilename;
   string line, stat2, stat3;
-  double stat1, stat4, stat5, stat6, stat7, stat8, stat9, stat10, stat11,
+  long int stat1, stat4, stat5, stat6, stat7, stat8, stat9, stat10, stat11,
       stat12, stat13, stat14, stat15, stat16, stat17, stat18, stat19, stat20,
       stat21, stat22, stat23, stat24, stat25, stat26, stat27, stat28, stat29,
       stat30, stat31, stat32, stat33, stat34, stat35, stat36, stat37, stat38,
@@ -81,11 +81,10 @@ void Process::Cpu_Mem_Utime() {
           stat42 >> stat43 >> stat44 >> stat45 >> stat46 >> stat47 >> stat48 >>
           stat49 >> stat50 >> stat51 >> stat52;
 
-      uptime = stat14 + stat15 + stat16 + stat17;
-      int temp_ram = stat23 / 1024;
-      ram = to_string(temp_ram);
-      double temp_seconds = LinuxParser::UpTime() - (stat22 / hertz);
-      cpu_util = (uptime / hertz) / temp_seconds;
+      long int total_time = stat14 + stat15 + stat16 + stat17;
+      ram = to_string(stat23 / 1024);
+      proc_uptime = LinuxParser::UpTime() - (stat22 / hertz);
+      cpu_util = (total_time / hertz) / (proc_uptime + (proc_uptime <= 0));
     }
   }
 }
