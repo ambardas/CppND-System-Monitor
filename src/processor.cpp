@@ -19,7 +19,8 @@ void Processor::update_prev_values() {
 }
 
 void Processor::read_raw_cpu_stats() {
-  string cpu, line;
+  string cpu;
+  string line;
   std::ifstream stream(LinuxParser::kProcDirectory + LinuxParser::kStatFilename);
   if (stream.is_open()) {
     std::getline(stream, line);

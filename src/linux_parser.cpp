@@ -38,7 +38,9 @@ string LinuxParser::OperatingSystem() {
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::Kernel() {
-  string os, version, kernel;
+  string os;
+  string version;
+  string kernel;
   string line;
   std::ifstream stream(kProcDirectory + kVersionFilename);
   if (stream.is_open()) {
@@ -72,7 +74,10 @@ vector<int> LinuxParser::Pids() {
 
 // TODO: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() {
-  float avail_mem, tot_mem, temp_mem, percentage_mem;
+  float avail_mem;
+  float tot_mem;
+  float temp_mem;
+  float percentage_mem;
   string line;
 
   std::ifstream stream(kProcDirectory + kMeminfoFilename);
@@ -200,10 +205,11 @@ long int LinuxParser::UpTime(int pid) {
   return process.UpTime(); 
 }
 
-std::unordered_map<int, std::string> LinuxParser::Uid_User_Map() {
-  std::unordered_map<int, std::string> uid_user_map;
-  std::string line;
-  std::string user, spacer;
+std::unordered_map<int, string> LinuxParser::Uid_User_Map() {
+  std::unordered_map<int, string> uid_user_map;
+  string line;
+  string user;
+  string spacer;
   int uid;
   std::ifstream filestream(kPasswordPath);
   if (filestream.is_open()) {

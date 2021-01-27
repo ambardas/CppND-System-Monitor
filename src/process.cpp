@@ -61,7 +61,9 @@ void Process::Cpu_Mem_Utime() {
   // int hertz = sysconf(_SC_CLK_TCK); // convert to compiletime const
   string user_file = LinuxParser::kProcDirectory + "/" + to_string(pid) +
                      LinuxParser::kStatFilename;
-  string line, stat2, stat3;
+  string line;
+  string stat2;
+  string stat3;
   long int stat1, stat4, stat5, stat6, stat7, stat8, stat9, stat10, stat11,
       stat12, stat13, stat14, stat15, stat16, stat17, stat18, stat19, stat20,
       stat21, stat22, stat23, stat24, stat25, stat26, stat27, stat28, stat29,
