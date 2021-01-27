@@ -21,6 +21,15 @@ const std::string kVersionFilename{"/version"};
 const std::string kOSPath{"/etc/os-release"};
 const std::string kPasswordPath{"/etc/passwd"};
 
+// Filters for value lookup by keys inside files
+const std::string filterProcesses("processes");
+const std::string filterRunningProcesses("procs_running");
+const std::string filterMemTotalString("MemTotal:");
+const std::string filterMemAvailableString("MemAvailable:");
+const std::string filterUID("Uid:");
+const std::string filterCpu("cpu");
+const std::string filterProcMem("VmData:");
+
 // System
 float MemoryUtilization();
 long UpTime();

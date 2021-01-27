@@ -94,7 +94,8 @@ void Process::Cpu_Mem_Utime() {
 void Process::GetUser() {
   string status_file = LinuxParser::kProcDirectory + "/" + to_string(pid) +
                        LinuxParser::kStatusFilename;
-  int an_id = LinuxParser::getFileValueByKey<int>(status_file, "Uid:");
+  int an_id =
+      LinuxParser::getFileValueByKey<int>(status_file, LinuxParser::filterUID);
   user = uid_user_map[an_id];
 }
 

@@ -111,8 +111,10 @@ vector<int> LinuxParser::Pids() {
 
 // TODO: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() {
-  float tot_mem = getFileValueByKey<float>(kProcDirectory + kMeminfoFilename, "MemTotal:");
-  float avail_mem = getFileValueByKey<float>(kProcDirectory + kMeminfoFilename, "MemAvailable:");
+  float tot_mem = getFileValueByKey<float>(kProcDirectory + kMeminfoFilename,
+                                           filterMemTotalString);
+  float avail_mem = getFileValueByKey<float>(kProcDirectory + kMeminfoFilename,
+                                             filterMemAvailableString);
   return (tot_mem - avail_mem) / tot_mem;
 }
 
@@ -139,12 +141,15 @@ vector<string> LinuxParser::CpuUtilization() { return {}; }
 
 // TODO: Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
-  return getFileValueByKey<int>(kProcDirectory + kStatFilename, "processes");
+  return getFileValueByKey<int>(kProcDirectory + kStatFilename,
+                                filterProcesses);
 }
 
 // TODO: Read and return the number of running processes
 int LinuxParser::RunningProcesses() {
-  return getFileValueByKey<int>(kProcDirectory + kStatFilename, "procs_running");;
+  return getFileValueByKey<int>(kProcDirectory + kStatFilename,
+                                filterRunningProcesses);
+  ;
 }
 
 // TODO: Read and return the command associated with a process
