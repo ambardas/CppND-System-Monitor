@@ -95,21 +95,8 @@ void Process::Cpu_Mem_Utime() {
 void Process::GetUser() {
   string status_file = LinuxParser::kProcDirectory + "/" + to_string(pid) +
                        LinuxParser::kStatusFilename;
-  string line;
-  string stat_name;
-  int an_id;
-  std::ifstream filestream(status_file);
-  if (filestream.is_open()) {
-    while (std::getline(filestream, line)) {
-      std::istringstream linestream(line);
-      while (linestream >> stat_name >> an_id) {
-        if (stat_name == "Uid:") {
-          user = uid_user_map[an_id];
-        }
-      }
-    }
-  }
-  filestream.close();
+  int an_id = LinuxParser::getFileValueByKey<int>(status_file, "Uid:");
+  user = uid_user_map[an_id];
 }
 
 void Process::GetCommand() {
@@ -119,8 +106,21 @@ void Process::GetCommand() {
   std::ifstream filestream(user_file);
   if (filestream.is_open()) {
     while (std::getline(filestream, line)) {
-      command = line;
+      if (line.size() > 0) {
+        command = line;
+      } else {
+        command = "__hidden__";
+      }
     }
   }
   filestream.close();
+
+  // Unable to figure out why the below does not work
+  // Aim: replace above with a templated call
+  // auto temp_command = LinuxParser::getFileValue<string>(user_file);
+  // if (temp_command.size() > 0){
+  //   command = temp_command;
+  // } else {
+  //   command = "__hidden__";
+  // }
 }
