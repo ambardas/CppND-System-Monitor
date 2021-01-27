@@ -82,7 +82,7 @@ void Process::Cpu_Mem_Utime() {
           stat49 >> stat50 >> stat51 >> stat52;
 
       uptime = stat14 + stat15 + stat16 + stat17;
-      int temp_ram = stat23 / 1000000;
+      int temp_ram = stat23 / 1024;
       ram = to_string(temp_ram);
       double temp_seconds = LinuxParser::UpTime() - (stat22 / hertz);
       cpu_util = (uptime / hertz) / temp_seconds;
