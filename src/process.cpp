@@ -87,6 +87,7 @@ void Process::Cpu_Mem_Utime() {
       cpu_util = (total_time / hertz) / (proc_uptime + (proc_uptime <= 0));
     }
   }
+  filestream.close();
 }
 
 void Process::GetUser() {
@@ -106,6 +107,7 @@ void Process::GetUser() {
       }
     }
   }
+  filestream.close();
 }
 
 void Process::GetCommand() {
@@ -118,4 +120,5 @@ void Process::GetCommand() {
       command = line;
     }
   }
+  filestream.close();
 }
