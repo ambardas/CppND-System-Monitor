@@ -1,7 +1,7 @@
 #include "processor.h"
 
 // TODO: Return the aggregate CPU utilization
-float Processor::Utilization() {
+double Processor::Utilization() {
   read_raw_cpu_stats();
   compute_cpu_util();
   return CPU_Percentage;
@@ -19,7 +19,8 @@ void Processor::update_prev_values() {
 }
 
 void Processor::read_raw_cpu_stats() {
-  string cpu, line;
+  string cpu;
+  string line;
   std::ifstream stream(LinuxParser::kProcDirectory + LinuxParser::kStatFilename);
   if (stream.is_open()) {
     std::getline(stream, line);
@@ -27,6 +28,7 @@ void Processor::read_raw_cpu_stats() {
     my_stream >> cpu >> user >> nice >> system >> idle >> iowait >> irq >>
         softirq >> steal >> guest >> guest_nice;
   }
+  stream.close();
 }
 
 void Processor::compute_cpu_util() {

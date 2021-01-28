@@ -6,14 +6,14 @@
 
 #include "linux_parser.h"
 
-#define hertz sysconf(_SC_CLK_TCK)
+#define HERTZ sysconf(_SC_CLK_TCK)
 /*
 Basic class for Process representation
 It contains relevant attributes as shown below
 */
 class Process {
  public:
-  Process(int pid, std::unordered_map<int, std::string> uid_user_map);
+  Process(int pid);
   int Pid() const;                         // TODO: See src/process.cpp
   std::string User() const;                // TODO: See src/process.cpp
   std::string Command() const;             // TODO: See src/process.cpp
@@ -28,7 +28,7 @@ class Process {
   std::string user;
   float cpu_util;
   std::string ram;
-  long int uptime;
+  long int proc_uptime;
   std::string command;
   std::unordered_map<int, std::string> uid_user_map;
 

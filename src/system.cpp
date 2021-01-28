@@ -3,6 +3,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "system.h"
 
@@ -11,17 +12,19 @@ using std::size_t;
 using std::string;
 using std::vector;
 
+bool Compare(const Process& a, const Process& b) { return a < b; }
+
 // TODO: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
 
 // TODO: Return a container composed of the system's processes
 vector<Process>& System::Processes() {
   processes_.clear();
-  auto uid_user_map = LinuxParser::Uid_User_Map();
   auto pids = LinuxParser::Pids();
   for (auto pid : pids) {
-    processes_.push_back(Process(pid, uid_user_map));
+    processes_.emplace_back(Process(pid));
   }
+  sort(processes_.begin(), processes_.end(), Compare);
   return processes_;
 }
 
