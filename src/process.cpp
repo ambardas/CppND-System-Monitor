@@ -55,6 +55,18 @@ bool Process::operator<(Process const& a) const {
   return a.CpuUtilization() < this->CpuUtilization();
 }
 
+// In a given string this function looks for a a specific string 
+//                           and replaces it with a given string.
+// This helper function only serves Process::Cpu_Mem_Utime()
+string findAndReplace(string subject, string lookfor, string replace_with) {
+  auto x = subject.find(lookfor);
+  if (x > subject.size()) {
+    return subject;
+  }
+  auto y = subject.replace(x, lookfor.length(), replace_with);
+  return subject;
+}
+
 void Process::Cpu_Mem_Utime() {
   // https://man7.org/linux/man-pages/man5/proc.5.html
   // https://stackoverflow.com/questions/16726779/how-do-i-get-the-total-cpu-usage-of-an-application-from-proc-pid-stat/16736599#16736599
@@ -72,6 +84,11 @@ void Process::Cpu_Mem_Utime() {
   std::ifstream filestream(user_file);
   if (filestream.is_open()) {
     while (std::getline(filestream, line)) {
+      // Some firefox process executable names have spaces in them
+      // The following 3 lines catch and correct this for consistency
+      line = findAndReplace(line, "Web Content", "Web_Content");
+      line = findAndReplace(line, "RDD Process", "RDD_Process");
+      line = findAndReplace(line, "Privileged Cont", "Privileged_Cont");
       std::istringstream linestream(line);
       linestream >> stat1 >> stat2 >> stat3 >> stat4 >> stat5 >> stat6 >>
           stat7 >> stat8 >> stat9 >> stat10 >> stat11 >> stat12 >> stat13 >>
@@ -85,7 +102,7 @@ void Process::Cpu_Mem_Utime() {
       long int total_time = stat14 + stat15 + stat16 + stat17;
       ram = to_string(stat23 / 1024);
       proc_uptime = LinuxParser::UpTime() - (stat22 / HERTZ);
-      cpu_util = (total_time / HERTZ) / (proc_uptime + (proc_uptime <= 0));
+      cpu_util = (total_time / HERTZ) / (proc_uptime + 1.00*(proc_uptime <= 0));
     }
   }
   filestream.close();
